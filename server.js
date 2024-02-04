@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const SongRouter = require("./routes/songRoutes");
 const SongController = require("./controllers/songcontroller");
 const SOng = require("./models/songModel");
-
+const cors = require("cors");
 // Create Express.js application
 const app = express();
 
@@ -11,10 +11,11 @@ const app = express();
 app.use(express.json());
 
 //allow cors
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  next();
-});
+// app.use((req, res, next) => {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   next();
+// });
+app.use(cors());
 
 // MongoDB connection URI
 //const uri = "mongodb://localhost:27017/song ";
