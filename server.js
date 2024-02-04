@@ -15,8 +15,13 @@ app.use(express.json());
 //   res.header("Access-Control-Allow-Origin", "*");
 //   next();
 // });
-app.use(cors());
+const corsOptions = {
+  origin: "*",
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  optionsSuccessStatus: 204,
+};
 
+app.use(cors(corsOptions));
 // MongoDB connection URI
 //const uri = "mongodb://localhost:27017/song ";
 
