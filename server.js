@@ -1,8 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const EmployeeRouter = require("./routes/employeeRoutes");
-const employeeController = require("./controllers/employeecontroller");
-const Employee = require("./models/employeeModel");
+const SongRouter = require("./routes/songRoutes");
+const SongController = require("./controllers/songcontroller");
+const SOng = require("./models/songModel");
 
 // Create Express.js application
 const app = express();
@@ -11,7 +11,7 @@ const app = express();
 app.use(express.json());
 
 // MongoDB connection URI
-const uri = "mongodb://localhost:27017";
+const uri = "mongodb://localhost:27017/song ";
 
 // Establish MongoDB connection
 mongoose
@@ -28,7 +28,7 @@ mongoose
 
 // Handle connection events
 mongoose.connection.on("connected", () => {
-  console.log("MongoDB connected");
+  console.log("MongoDB connected to " + uri);
 });
 
 mongoose.connection.on("error", (error) => {
@@ -39,7 +39,12 @@ mongoose.connection.on("disconnected", () => {
   console.log("MongoDB disconnected");
 });
 
-app.use("/employees", EmployeeRouter);
+app.use("/song", SongRouter);
+
+//handle for non-existing routes
+app.use((req, res) => {
+  res.status(404).json({ error: "Not found" });
+});
 
 const port = 6000;
 app.listen(port, () => {
