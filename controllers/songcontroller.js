@@ -20,7 +20,7 @@ exports.getSongs = async (req, res) => {
     if (!songs) {
       res.status(200).json({ message: "No Registred songs" });
     }
-    res.json({ data: songs });
+    res.json(songs);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -168,6 +168,20 @@ exports.getTotalNumberOfSongsOfEachAlbum = async (req, res) => {
       });
     }
     res.json({ songsOfEachAlbum: songsOfEachAlbum });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+exports.getTotalNUmberOfSongsInEachGenre = async (req, res) => {
+  try {
+    const distinctGenres = await Song.distinct("genre");
+    const songsOfEachGenre = [];
+    for (const genre of distinctGenres) {
+      const songs = await Song.find({ genre: genre });
+      songsOfEachGenre.push({ genre: genre, songs: songs.length });
+    }
+    res.json({ songsOfEachGenre: songsOfEachGenre });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

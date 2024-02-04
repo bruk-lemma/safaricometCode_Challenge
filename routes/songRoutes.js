@@ -32,4 +32,8 @@ router
   .route("/stat/AlbumStat")
   .get(songController.getTotalNumberOfSongsOfEachAlbum);
 
+router
+  .route("/stat/GenreStat")
+  .get(songController.getTotalNUmberOfSongsInEachGenre);
+
 module.exports = router;
