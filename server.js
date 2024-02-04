@@ -11,7 +11,10 @@ const app = express();
 app.use(express.json());
 
 // MongoDB connection URI
-const uri = "mongodb://localhost:27017/song ";
+//const uri = "mongodb://localhost:27017/song ";
+
+const uri =
+  "mongodb+srv://bruk:bruk@cluster0.dgmqahh.mongodb.net/song?retryWrites=true&w=majority";
 
 // Establish MongoDB connection
 mongoose
@@ -46,7 +49,7 @@ app.use((req, res) => {
   res.status(404).json({ error: "Not found" });
 });
 
-const port = 6000;
-app.listen(port, () => {
-  console.log(`Server listening on port ${port}`);
+const PORT = process.env.PORT || 6000;
+app.listen(PORT, () => {
+  console.log(`Server listening on port ${PORT}`);
 });
