@@ -10,6 +10,12 @@ const app = express();
 // Use JSON body parser
 app.use(express.json());
 
+//allow cors
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  next();
+});
+
 // MongoDB connection URI
 //const uri = "mongodb://localhost:27017/song ";
 
